@@ -8,13 +8,6 @@
 // Под “проведением исследования” можно понимать например получение всех детей выбранного человека.
 
 
-
-
-
-//Татьяна Михайловна (5 (15) января 1636 — 24 августа (4 сентября) 1706).
-
-
-
 import java.time.LocalDate;
 
 public class Main
@@ -45,13 +38,11 @@ public class Main
             tatyana = new Human("Tatyana Mikhailovna", "Romanova", Human.GenderEnum.Woman,
                     LocalDate.of(1636, 1, 15), LocalDate.of(1706, 9, 4),
                     mikhail, evdokia);
-
         }
         catch (Exception exception)
         {
             System.out.println(exception.getMessage());
         }
-
 
         Family family = new Family("Romanov");
         family.AddFamilyMember(mikhail);
@@ -63,8 +54,5 @@ public class Main
 
         Family children = family.GetChildrenOf(mikhail);
         System.out.println(children);
-
-
     }
-
 }
