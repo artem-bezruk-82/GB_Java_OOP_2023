@@ -1,0 +1,58 @@
+// Курс: Java. Объектно-ориентированное программирование
+// Урок 1. Принципы ООП: Инкапсуляция, наследование, полиморфизм
+// Домашняя работа
+
+//Задание
+// Реализовать, с учетом ооп подхода, приложение для проведения исследований с генеалогическим древом.
+// Идея: описать некоторое количество компонент, например: модель человека и дерева
+// Под “проведением исследования” можно понимать например получение всех детей выбранного человека.
+
+
+import java.time.LocalDate;
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        Human mikhail = null;
+        Human evdokia = null;
+        Human irina = null;
+        Human alexey = null;
+        Human anna = null;
+        Human tatyana = null;
+        try
+        {
+            mikhail = new Human("Mikhail Fedorovich", "Romanov", Human.GenderEnum.Man,
+                    LocalDate.of(1596, 7, 22), LocalDate.of(1645, 7, 23));
+            evdokia = new Human("Evdokia Lukianovna", "Streshneva", Human.GenderEnum.Woman,
+                    LocalDate.of(1608, 1, 1), LocalDate.of(1645, 8, 28));
+            irina = new Human("Irina Mikhailovna", "Romanova", Human.GenderEnum.Woman,
+                    LocalDate.of(1627, 4, 22), LocalDate.of(1679, 4, 8),
+                    mikhail, evdokia);
+            alexey = new Human("Alexey Mikhailovich", "Romanov", Human.GenderEnum.Man,
+                    LocalDate.of(1629,3,29), LocalDate.of(1676,2,8),
+                    mikhail, evdokia);
+            anna = new Human("Anna Mikhailovna", "Romanova", Human.GenderEnum.Woman,
+                    LocalDate.of(1630, 7, 24), LocalDate.of(1692, 11, 6),
+                    mikhail, evdokia);
+            tatyana = new Human("Tatyana Mikhailovna", "Romanova", Human.GenderEnum.Woman,
+                    LocalDate.of(1636, 1, 15), LocalDate.of(1706, 9, 4),
+                    mikhail, evdokia);
+        }
+        catch (Exception exception)
+        {
+            System.out.println(exception.getMessage());
+        }
+
+        Family family = new Family("Romanov");
+        family.AddFamilyMember(mikhail);
+        family.AddFamilyMember(evdokia);
+        family.AddFamilyMember(irina);
+        family.AddFamilyMember(alexey);
+        family.AddFamilyMember(anna);
+        family.AddFamilyMember(tatyana);
+
+        Family children = family.GetChildrenOf(mikhail);
+        System.out.println(children);
+    }
+}
