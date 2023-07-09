@@ -56,6 +56,7 @@ public class Human implements Serializable
         this(name, surname, gender, birthDate, null, father, mother);
     }
 
+
     public Human(String name, String surname, GenderEnum gender, LocalDate birthDate) throws Exception
     {
         this(name, surname, gender, birthDate, null, null, null);
@@ -172,6 +173,7 @@ public class Human implements Serializable
     public String toString()
     {
         return String.format("%s %s %s %s",
-                name, surname, birthDate.toString(), (deathDate == null ? "" : "- " + deathDate.toString()));
+                name, surname, (birthDate == null ? "" : "- " + birthDate.toString()),
+                (deathDate == null ? "" : "- " + deathDate.toString()));
     }
 }

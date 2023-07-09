@@ -16,6 +16,7 @@ public class Main
 {
     public static void main(String[] args)
     {
+
         Human mikhail = null;
         Human evdokia = null;
         Human irina = null;
@@ -32,7 +33,7 @@ public class Main
                     LocalDate.of(1627, 4, 22), LocalDate.of(1679, 4, 8),
                     mikhail, evdokia);
             alexey = new Human("Alexey Mikhailovich", "Romanov", Human.GenderEnum.Man,
-                    LocalDate.of(1629,3,29), LocalDate.of(1676,2,8),
+                     LocalDate.of(1629,3,29), LocalDate.of(1676,2,8),
                     mikhail, evdokia);
             anna = new Human("Anna Mikhailovna", "Romanova", Human.GenderEnum.Woman,
                     LocalDate.of(1630, 7, 24), LocalDate.of(1692, 11, 6),

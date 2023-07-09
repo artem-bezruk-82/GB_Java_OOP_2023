@@ -17,7 +17,11 @@ public class Family implements Serializable, Iterable<Human>
 
     public Family() { this(null);}
 
-    public void AddFamilyMember(Human human) { family.add(human); }
+    public void AddFamilyMember(Human human)
+    {
+        if (!family.contains(human))
+            family.add(human);
+    }
 
     public String GetName() { return name; }
     public void SetName(String name) { this.name = name; }
