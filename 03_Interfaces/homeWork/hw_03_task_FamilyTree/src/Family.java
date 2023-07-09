@@ -25,10 +25,10 @@ public class Family implements Serializable, Iterable<Human>
     public Family GetChildrenOf(Human human)
     {
         Family children = new Family();
-        children.name = String.format("%s's children", human.GetName());
+        children.name = String.format("%s's children", human.getName());
         for (Human member : family)
         {
-            if (member.GetFather() == human)
+            if (member.getFather() == human)
                 children.AddFamilyMember(member);
         }
         return children;
@@ -58,6 +58,11 @@ public class Family implements Serializable, Iterable<Human>
     public void sortByBirthDate()
     {
         family.sort(new HumanComparatorBirthDate());
+    }
+
+    public void sortByDeathDate()
+    {
+        family.sort(new HumanComparatorDeathDate());
     }
 
     @Override

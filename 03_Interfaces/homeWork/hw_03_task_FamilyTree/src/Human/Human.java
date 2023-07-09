@@ -1,7 +1,6 @@
 package Human;
 
 import java.io.Serializable;
-import java.lang.constant.Constable;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -18,30 +17,30 @@ public class Human implements Serializable
         Unknown
     }
 
-    private String _name;
-    private String _surname;
-    private LocalDate _birthDate;
-    private LocalDate _deathDate;
-    private GenderEnum _gender;
-    private Human _father;
-    private Human _mother;
+    private String name;
+    private String surname;
+    private LocalDate birthDate;
+    private LocalDate deathDate;
+    private GenderEnum gender;
+    private Human father;
+    private Human mother;
 
     public Human(String name, String surname, GenderEnum gender, LocalDate birthDate, LocalDate deathDate,
                  Human father, Human mother)
             throws Exception
     {
-        _name = name;
-        _surname = surname;
-        _gender = gender;
+        this.name = name;
+        this.surname = surname;
+        this.gender = gender;
         SetLifeDates(birthDate, deathDate);
 
         if (father != null)
             SetParent(father);
-        else _father = null;
+        else this.father = null;
 
         if (mother != null)
             SetParent(mother);
-        else _mother = null;
+        else this.mother = null;
 
     }
 
@@ -67,14 +66,17 @@ public class Human implements Serializable
         this("","", GenderEnum.Unknown, null);
     }
 
-    public String GetName() { return _name; }
-    public void SetName(String name) { _name = name; }
-    public String GetSurname() { return _surname; }
-    public void SetSurname(String surname) { _surname = surname; }
-    public GenderEnum GetGender() { return _gender; }
-    public LocalDate GetBirthDate() { return _birthDate; }
-    public Human GetFather() { return _father; }
-    public Human GetMother() { return _mother; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getSurname() { return surname; }
+    public void setSurname(String surname) { this.surname = surname; }
+    public GenderEnum getGender() { return gender; }
+    public LocalDate getBirthDate() { return birthDate; }
+
+    public LocalDate getDeathDate() { return deathDate; }
+
+    public Human getFather() { return father; }
+    public Human getMother() { return mother; }
 
     private void SetLifeDates(LocalDate birthDate, LocalDate deathDate) throws Exception
     {
@@ -83,45 +85,45 @@ public class Human implements Serializable
             if (birthDate.isAfter(deathDate))
                 throw new Exception("Birthdate can not follow by death date");
         }
-        _birthDate = birthDate;
-        _deathDate = deathDate;
+        this.birthDate = birthDate;
+        this.deathDate = deathDate;
     }
 
     public int GetAge()
     {
-        return Period.between(_birthDate, LocalDate.now()).getYears();
+        return Period.between(birthDate, LocalDate.now()).getYears();
     }
 
     public void SetParent(Human parent) throws Exception
     {
         if (parent != this)
         {
-            if (parent._gender == GenderEnum.Man)
+            if (parent.gender == GenderEnum.Man)
             {
-                if (_father == null)
+                if (father == null)
                 {
-                    if (parent._deathDate != null)
+                    if (parent.deathDate != null)
                     {
-                        if (parent._deathDate.isBefore(_birthDate))
+                        if (parent.deathDate.isBefore(birthDate))
                         {
-                            if ((Period.between(parent._deathDate, _birthDate).getMonths() > 9))
+                            if ((Period.between(parent.deathDate, birthDate).getMonths() > 9))
                                 throw new Exception(String.format("%s can not be father as soon as he had died before %s was born",
-                                        parent._name, _name));
+                                        parent.name, name));
                         }
                     }
 
-                    if (parent._birthDate != null)
+                    if (parent.birthDate != null)
                     {
-                        if (parent._birthDate.isAfter(_birthDate))
+                        if (parent.birthDate.isAfter(birthDate))
                             throw new Exception(String.format("%s can not be father as soon as he is younger than %s",
-                                    parent._name, _name));
+                                    parent.name, name));
 
-                        else if (Period.between(parent._birthDate, _birthDate).getYears() < fertilePeriodManStart ||
-                                Period.between(parent._birthDate, _birthDate).getYears() > fertilePeriodManEnd)
+                        else if (Period.between(parent.birthDate, birthDate).getYears() < fertilePeriodManStart ||
+                                Period.between(parent.birthDate, birthDate).getYears() > fertilePeriodManEnd)
                             throw new Exception(String.format("%s can not be father as soon as he was outside %d...%d years old",
-                                    parent._name, fertilePeriodManStart, fertilePeriodManEnd));
+                                    parent.name, fertilePeriodManStart, fertilePeriodManEnd));
                     }
-                    _father = parent;
+                    father = parent;
                 }
                 else
                 {
@@ -130,29 +132,29 @@ public class Human implements Serializable
 
             }
 
-            if (parent._gender == GenderEnum.Woman)
+            if (parent.gender == GenderEnum.Woman)
             {
-                if (_mother == null)
+                if (mother == null)
                 {
-                    if (parent._deathDate != null)
+                    if (parent.deathDate != null)
                     {
-                        if (parent._deathDate.isBefore(_birthDate))
+                        if (parent.deathDate.isBefore(birthDate))
                             throw new Exception(String.format("%s can not be mother as soon as she had died before %s was born",
-                                    parent._name, _name));
+                                    parent.name, name));
                     }
 
-                    if (parent._birthDate != null)
+                    if (parent.birthDate != null)
                     {
-                        if (parent._birthDate.isAfter(_birthDate))
+                        if (parent.birthDate.isAfter(birthDate))
                             throw new Exception(String.format("%s can not be mother as soon as she is younger than %s",
-                                    parent._name, _name));
+                                    parent.name, name));
 
-                        if (Period.between(parent._birthDate, _birthDate).getYears() < fertilePeriodWomanStart ||
-                                Period.between(parent._birthDate, _birthDate).getYears() > fertilePeriodWomanEnd)
+                        if (Period.between(parent.birthDate, birthDate).getYears() < fertilePeriodWomanStart ||
+                                Period.between(parent.birthDate, birthDate).getYears() > fertilePeriodWomanEnd)
                             throw new Exception(String.format("%s can not be mother as soon as she was outside %d...%d years old",
-                                    parent._name, fertilePeriodWomanStart, fertilePeriodWomanEnd));
+                                    parent.name, fertilePeriodWomanStart, fertilePeriodWomanEnd));
                     }
-                    _mother = parent;
+                    mother = parent;
                 }
                 else
                 {
@@ -170,6 +172,6 @@ public class Human implements Serializable
     public String toString()
     {
         return String.format("%s %s %s %s",
-                _name, _surname, _birthDate.toString(), (_deathDate == null ? "" : "- " + _deathDate.toString()));
+                name, surname, birthDate.toString(), (deathDate == null ? "" : "- " + deathDate.toString()));
     }
 }

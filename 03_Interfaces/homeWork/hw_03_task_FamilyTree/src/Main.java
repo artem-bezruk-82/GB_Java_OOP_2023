@@ -64,7 +64,12 @@ public class Main
 
         System.out.println(romanovFamily);
 
+        System.out.println("Sorted by birth date");
         romanovFamily.sortByBirthDate();
+        System.out.println(romanovFamily);
+
+        System.out.println("Sorted by death date");
+        romanovFamily.sortByDeathDate();
         System.out.println(romanovFamily);
     }
 }
