@@ -1,4 +1,7 @@
 import Human.*;
+import Human.Comparators.HumanComparatorBirthDate;
+import Human.Comparators.HumanComparatorDeathDate;
+import Human.Comparators.HumanSortingTypesEnum;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -59,14 +62,17 @@ public class Family implements Serializable, Iterable<Human>
         return sb.toString();
     }
 
-    public void sortByBirthDate()
+    public void sort(HumanSortingTypesEnum sortingType)
     {
-        family.sort(new HumanComparatorBirthDate());
-    }
-
-    public void sortByDeathDate()
-    {
-        family.sort(new HumanComparatorDeathDate());
+        switch (sortingType)
+        {
+            case sort_by_birthDate:
+                family.sort(new HumanComparatorBirthDate());
+                break;
+            case sort_by_deathDate:
+                family.sort(new HumanComparatorDeathDate());
+                break;
+        }
     }
 
     @Override

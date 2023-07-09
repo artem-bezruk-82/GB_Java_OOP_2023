@@ -1,8 +1,8 @@
-package Human;
+package Human.Comparators;
 
-import java.util.Comparator;
+import Human.Human;
 
-public class HumanComparatorBirthDate implements Comparator<Human>
+public class HumanComparatorBirthDate extends HumanComparator
 {
     @Override
     public int compare(Human left, Human right)

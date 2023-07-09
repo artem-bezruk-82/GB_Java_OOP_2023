@@ -9,6 +9,7 @@
 
 import FilesHandling.*;
 import Human.*;
+import Human.Comparators.HumanSortingTypesEnum;
 
 import java.time.LocalDate;
 
@@ -66,11 +67,11 @@ public class Main
         System.out.println(romanovFamily);
 
         System.out.println("Sorted by birth date");
-        romanovFamily.sortByBirthDate();
+        romanovFamily.sort(HumanSortingTypesEnum.sort_by_birthDate);
         System.out.println(romanovFamily);
 
         System.out.println("Sorted by death date");
-        romanovFamily.sortByDeathDate();
+        romanovFamily.sort(HumanSortingTypesEnum.sort_by_deathDate);
         System.out.println(romanovFamily);
     }
 }
