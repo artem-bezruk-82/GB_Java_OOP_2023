@@ -1,29 +1,32 @@
+import Human.*;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Family implements Serializable
+public class Family implements Serializable, Iterable<Human>
 {
-    private String _name;
-    private ArrayList<Human> _family;
+    private String name;
+    private ArrayList<Human> family;
 
     public Family(String name)
     {
-        _name = name;
-        _family = new ArrayList<>();
+        this.name = name;
+        family = new ArrayList<>();
     }
 
     public Family() { this(null);}
 
-    public void AddFamilyMember(Human human) { _family.add(human); }
+    public void AddFamilyMember(Human human) { family.add(human); }
 
-    public String GetName() { return _name; }
-    public void SetName(String name) { _name = name; }
+    public String GetName() { return name; }
+    public void SetName(String name) { this.name = name; }
 
     public Family GetChildrenOf(Human human)
     {
         Family children = new Family();
-        children._name = String.format("%s's children", human.GetName());
-        for (Human member : _family)
+        children.name = String.format("%s's children", human.GetName());
+        for (Human member : family)
         {
             if (member.GetFather() == human)
                 children.AddFamilyMember(member);
@@ -38,17 +41,22 @@ public class Family implements Serializable
 
     public Human GetFamilyMember(int index)
     {
-        return _family.get(index);
+        return family.get(index);
     }
 
     @Override
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("%s\n", _name));
-        for (int i = 0; i < _family.size(); i++)
-            sb.append(String.format("\t%d - %s\n", i, _family.get(i).toString()));
+        sb.append(String.format("%s\n", name));
+        for (int i = 0; i < family.size(); i++)
+            sb.append(String.format("\t%d - %s\n", i, family.get(i).toString()));
 
         return sb.toString();
+    }
+
+    @Override
+    public Iterator<Human> iterator() {
+        return new HumanIterator(family);
     }
 }

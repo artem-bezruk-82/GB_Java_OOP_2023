@@ -7,6 +7,9 @@
 // Создать методы сортировки списка людей перед выводом, например по имени или по дате рождения (не менее 2)
 // Создать пакетную структуру для проекта
 
+import FilesHandling.*;
+import Human.*;
+
 import java.time.LocalDate;
 
 public class Main
@@ -51,14 +54,14 @@ public class Main
         romanovFamily.AddFamilyMember(mikhail);
         romanovFamily.AddFamilyMember(evdokia);
         romanovFamily.AddFamilyMember(irina);
-        fh.Save(romanovFile, romanovFamily);
+        fh.save(romanovFile, romanovFamily);
         romanovFamily = null;
 
-        romanovFamily = (Family) fh.Read(romanovFile);
+        romanovFamily = (Family) fh.read(romanovFile);
         romanovFamily.AddFamilyMember(alexey);
         romanovFamily.AddFamilyMember(anna);
         romanovFamily.AddFamilyMember(tatyana);
-        fh.Save(romanovFile, romanovFamily);
+        fh.save(romanovFile, romanovFamily);
 
         System.out.println(romanovFamily);
     }

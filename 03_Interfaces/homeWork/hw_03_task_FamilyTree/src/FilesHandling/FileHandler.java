@@ -1,3 +1,5 @@
+package FilesHandling;
+
 import java.io.Serializable;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
@@ -7,7 +9,7 @@ import java.io.FileInputStream;
 public class FileHandler implements ISaveble, IReadable
 {
     @Override
-    public void Save(String filePath, Serializable object)
+    public void save(String filePath, Serializable object)
     {
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath)))
         {
@@ -20,7 +22,7 @@ public class FileHandler implements ISaveble, IReadable
     }
 
     @Override
-    public Serializable Read(String filePath)
+    public Serializable read(String filePath)
     {
         Serializable object = null;
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath)))
