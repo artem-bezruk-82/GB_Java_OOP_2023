@@ -55,6 +55,11 @@ public class Family implements Serializable, Iterable<Human>
         return sb.toString();
     }
 
+    public void sortByBirthDate()
+    {
+        family.sort(new HumanComparatorBirthDate());
+    }
+
     @Override
     public Iterator<Human> iterator() {
         return new HumanIterator(family);

@@ -48,7 +48,6 @@ public class Main
 
         FileHandler fh = new FileHandler();
 
-
         String romanovFile = "romanov.dat";
         Family romanovFamily = new Family("Romanov");
         romanovFamily.AddFamilyMember(mikhail);
@@ -63,6 +62,9 @@ public class Main
         romanovFamily.AddFamilyMember(tatyana);
         fh.save(romanovFile, romanovFamily);
 
+        System.out.println(romanovFamily);
+
+        romanovFamily.sortByBirthDate();
         System.out.println(romanovFamily);
     }
 }
