@@ -179,7 +179,7 @@ public class Human implements Serializable, IMember
     public String toString()
     {
         return String.format("%s %s %s %s",
-                name, surname, (birthDate == null ? "" : "- " + birthDate.toString()),
-                (deathDate == null ? "" : "- " + deathDate.toString()));
+                name, surname, (birthDate == null ? "" : "- " + birthDate),
+                (deathDate == null ? "" : "- " + deathDate));
     }
 }

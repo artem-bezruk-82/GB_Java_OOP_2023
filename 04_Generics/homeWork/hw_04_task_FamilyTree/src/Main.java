@@ -51,14 +51,14 @@ public class Main {
         FileHandler fh = new FileHandler();
 
         String romanovFile = "romanov.dat";
-        Family romanovFamily = new Family("Romanov");
+        Family<Human> romanovFamily = new Family<Human>("Romanov");
         romanovFamily.AddFamilyMember(mikhail);
         romanovFamily.AddFamilyMember(evdokia);
         romanovFamily.AddFamilyMember(irina);
         fh.save(romanovFile, romanovFamily);
         romanovFamily = null;
 
-        romanovFamily = (Family) fh.read(romanovFile);
+        romanovFamily = (Family<Human>) fh.read(romanovFile);
         romanovFamily.AddFamilyMember(alexey);
         romanovFamily.AddFamilyMember(anna);
         romanovFamily.AddFamilyMember(tatyana);

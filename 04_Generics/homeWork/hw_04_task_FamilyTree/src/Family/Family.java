@@ -30,19 +30,19 @@ public class Family<E extends IMember> implements Serializable, Iterable<E>
     public String GetName() { return name; }
     public void SetName(String name) { this.name = name; }
 
-    public Family GetChildrenOf(E parent)
+    public Family<E> GetChildrenOf(E parent)
     {
-        Family children = new Family();
+        Family<E> children = new Family<E>();
         children.name = String.format("%s's children", parent.getName());
         for (E member : family)
         {
-            if (member.getFather() == parent)
+            if (member.getFather() == parent || member.getMother() == parent)
                 children.AddFamilyMember(member);
         }
         return children;
     }
 
-    public Family GetChildrenOf(int index)
+    public Family<E> GetChildrenOf(int index)
     {
         return GetChildrenOf(GetFamilyMember(index));
     }
@@ -65,19 +65,15 @@ public class Family<E extends IMember> implements Serializable, Iterable<E>
 
     public void sort(MemberSortingTypesEnum sortingType)
     {
-        switch (sortingType)
-        {
-            case sort_by_birthDate:
-                family.sort(new MemberComparatorBirthDate<>());
-                break;
-            case sort_by_deathDate:
-                family.sort(new MemberComparatorDeathDate<>());
-                break;
+        switch (sortingType) {
+            case sort_by_birthDate -> family.sort(new MemberComparatorBirthDate<>());
+            case sort_by_deathDate -> family.sort(new MemberComparatorDeathDate<>());
         }
     }
 
     @Override
-    public Iterator<E> iterator() {
-        return new MemberIterator(family);
+    public Iterator<E> iterator()
+    {
+        return new MemberIterator<>(family);
     }
 }
