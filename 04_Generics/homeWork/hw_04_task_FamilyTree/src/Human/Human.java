@@ -1,10 +1,12 @@
 package Human;
 
+import Family.IMember;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class Human implements Serializable
+public class Human implements Serializable, IMember
 {
     private static int fertilePeriodWomanStart = 15;
     private static int fertilePeriodWomanEnd = 50;
@@ -72,11 +74,15 @@ public class Human implements Serializable
     public String getSurname() { return surname; }
     public void setSurname(String surname) { this.surname = surname; }
     public GenderEnum getGender() { return gender; }
-    public LocalDate getBirthDate() { return birthDate; }
 
+    @Override
+    public LocalDate getBirthDate() { return birthDate; }
+    @Override
     public LocalDate getDeathDate() { return deathDate; }
 
+    @Override
     public Human getFather() { return father; }
+    @Override
     public Human getMother() { return mother; }
 
     private void SetLifeDates(LocalDate birthDate, LocalDate deathDate) throws Exception

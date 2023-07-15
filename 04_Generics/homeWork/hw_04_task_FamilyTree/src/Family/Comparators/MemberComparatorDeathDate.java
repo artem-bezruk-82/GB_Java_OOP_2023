@@ -1,13 +1,13 @@
-package Human.Comparators;
+package Family.Comparators;
 
-import Human.Human;
+import Family.IMember;
 
 import java.util.Comparator;
 
-public class HumanComparatorDeathDate implements Comparator<Human>
+public class MemberComparatorDeathDate<T extends IMember> implements Comparator<T>
 {
     @Override
-    public int compare(Human left, Human right)
+    public int compare(T left, T right)
     {
         if (left.getDeathDate() != null && right.getDeathDate() != null)
         {

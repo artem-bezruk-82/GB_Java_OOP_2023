@@ -1,15 +1,15 @@
-package Human;
+package Family;
 
 
 import java.util.Iterator;
 import java.util.List;
 
-public class HumanIterator implements Iterator<Human>
+public class MemberIterator<E> implements Iterator<E>
 {
     private int index;
-    private List<Human> members;
+    private List<E> members;
 
-    public HumanIterator(List<Human> membersList)
+    public MemberIterator(List<E> membersList)
     {
         this.members = membersList;
     }
@@ -21,8 +21,8 @@ public class HumanIterator implements Iterator<Human>
     }
 
     @Override
-    public Human next()
+    public E next()
     {
-        return members.get(index++);
+        return this.members.get(index++);
     }
 }

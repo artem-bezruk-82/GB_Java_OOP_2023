@@ -8,9 +8,10 @@
 // Продумать(только подумать, но можно и попробовать реализовать) класс общения с пользователем,
 // набор команд, для операций над деревом
 
+import Family.Family;
 import FilesHandling.*;
 import Human.*;
-import Human.Comparators.HumanSortingTypesEnum;
+import Family.Comparators.MemberSortingTypesEnum;
 
 import java.time.LocalDate;
 
@@ -66,11 +67,11 @@ public class Main {
         System.out.println(romanovFamily);
 
         System.out.println("Sorted by birth date");
-        romanovFamily.sort(HumanSortingTypesEnum.sort_by_birthDate);
+        romanovFamily.sort(MemberSortingTypesEnum.sort_by_birthDate);
         System.out.println(romanovFamily);
 
         System.out.println("Sorted by death date");
-        romanovFamily.sort(HumanSortingTypesEnum.sort_by_deathDate);
+        romanovFamily.sort(MemberSortingTypesEnum.sort_by_deathDate);
         System.out.println(romanovFamily);
     }
 }

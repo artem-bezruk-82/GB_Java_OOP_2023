@@ -1,16 +1,17 @@
-import Human.*;
-import Human.Comparators.HumanComparatorBirthDate;
-import Human.Comparators.HumanComparatorDeathDate;
-import Human.Comparators.HumanSortingTypesEnum;
+package Family;
+
+import Family.Comparators.MemberComparatorBirthDate;
+import Family.Comparators.MemberComparatorDeathDate;
+import Family.Comparators.MemberSortingTypesEnum;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Family implements Serializable, Iterable<Human>
+public class Family<E extends IMember> implements Serializable, Iterable<E>
 {
     private String name;
-    private ArrayList<Human> family;
+    private ArrayList<E> family;
 
     public Family(String name)
     {
@@ -20,22 +21,22 @@ public class Family implements Serializable, Iterable<Human>
 
     public Family() { this(null);}
 
-    public void AddFamilyMember(Human human)
+    public void AddFamilyMember(E member)
     {
-        if (!family.contains(human))
-            family.add(human);
+        if (!family.contains(member))
+            family.add(member);
     }
 
     public String GetName() { return name; }
     public void SetName(String name) { this.name = name; }
 
-    public Family GetChildrenOf(Human human)
+    public Family GetChildrenOf(E parent)
     {
         Family children = new Family();
-        children.name = String.format("%s's children", human.getName());
-        for (Human member : family)
+        children.name = String.format("%s's children", parent.getName());
+        for (E member : family)
         {
-            if (member.getFather() == human)
+            if (member.getFather() == parent)
                 children.AddFamilyMember(member);
         }
         return children;
@@ -46,7 +47,7 @@ public class Family implements Serializable, Iterable<Human>
         return GetChildrenOf(GetFamilyMember(index));
     }
 
-    public Human GetFamilyMember(int index)
+    public E GetFamilyMember(int index)
     {
         return family.get(index);
     }
@@ -62,21 +63,21 @@ public class Family implements Serializable, Iterable<Human>
         return sb.toString();
     }
 
-    public void sort(HumanSortingTypesEnum sortingType)
+    public void sort(MemberSortingTypesEnum sortingType)
     {
         switch (sortingType)
         {
             case sort_by_birthDate:
-                family.sort(new HumanComparatorBirthDate());
+                family.sort(new MemberComparatorBirthDate<>());
                 break;
             case sort_by_deathDate:
-                family.sort(new HumanComparatorDeathDate());
+                family.sort(new MemberComparatorDeathDate<>());
                 break;
         }
     }
 
     @Override
-    public Iterator<Human> iterator() {
-        return new HumanIterator(family);
+    public Iterator<E> iterator() {
+        return new MemberIterator(family);
     }
 }
