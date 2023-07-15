@@ -3,12 +3,12 @@ package student;
 import java.util.Iterator;
 import java.util.List;
 
-public class StudentIterator implements Iterator<Student>
+public class StudentIterator<E> implements Iterator<E>
 {
     private int index;
-    private List<Student> students;
+    private List<E> students;
 
-    public StudentIterator(List<Student> students)
+    public StudentIterator(List<E> students)
     {
         this.students = students;
     }
@@ -20,7 +20,7 @@ public class StudentIterator implements Iterator<Student>
     }
 
     @Override
-    public Student next()
+    public E next()
     {
         return this.students.get(index++);
     }

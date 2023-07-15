@@ -35,7 +35,7 @@ public class StudyGroup<E extends IGroupItem> implements Iterable<E>
     @Override
     public Iterator<E> iterator()
     {
-        return new StudentIterator(students);
+        return new StudentIterator<>(students);
     }
 
     public void SortByName()

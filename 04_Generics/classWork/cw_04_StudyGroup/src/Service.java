@@ -5,7 +5,7 @@ import student.Student;
 public class Service
 {
     private long id;
-    private StudyGroup studyGroup;
+    private StudyGroup<Student> studyGroup;
 
     public Service()
     {
