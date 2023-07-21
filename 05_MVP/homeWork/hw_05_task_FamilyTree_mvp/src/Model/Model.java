@@ -1,18 +1,19 @@
-package model;
+package Model;
 
+import Family.Family;
 import FilesHandling.FileHandler;
-import model.Family.Family;
-import model.Human.Human;
+import Human.Human;
 
 public class Model
 {
-    private Family<Human> family;
-    private String filePath;
+    Family<Human> family;
+    String filePath;
 
     public Model(String filePath)
     {
         this.filePath = filePath;
         load();
+
     }
 
     public void load()
@@ -20,7 +21,9 @@ public class Model
         FileHandler fh = new FileHandler();
         this.family = (Family<Human>) fh.read(filePath);
         if (this.family == null)
-            this.family = new Family<>();
+        {
+            this.family = new Family<Human>();
+        }
     }
 
     public void save()
@@ -30,7 +33,4 @@ public class Model
     }
 
     public Family<Human> getFamily() { return this.family; }
-
-
-
 }
