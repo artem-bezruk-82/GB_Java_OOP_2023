@@ -3,10 +3,10 @@ package view.menu.commands.human;
 import view.human.ConsoleUIHuman;
 import view.menu.commands.Command;
 
-public class Exit extends Command
+public class Apply extends Command
 {
 
-    public Exit(ConsoleUIHuman consoleUIHuman)
+    public Apply(ConsoleUIHuman consoleUIHuman)
     {
         super(consoleUIHuman, "Exit");
     }

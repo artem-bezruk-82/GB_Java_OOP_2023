@@ -5,6 +5,7 @@ import model.Family.IMember;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Objects;
 
 public class Human implements Serializable, IMember
 {
@@ -16,9 +17,9 @@ public class Human implements Serializable, IMember
 
     public enum GenderEnum
     {
+        Unknown,
         Man,
-        Woman,
-        Unknown
+        Woman
     }
 
     private String name;
@@ -36,7 +37,8 @@ public class Human implements Serializable, IMember
         this.name = name;
         this.surname = surname;
         this.gender = gender;
-        setLifeDates(birthDate, deathDate);
+        setBirthDate(birthDate);
+        setDeathDate(deathDate);
 
         if (father != null)
             setParent(father);
@@ -137,16 +139,16 @@ public class Human implements Serializable, IMember
         this.deathDate = deathDate;
     }
 
-    private void setLifeDates(LocalDate birthDate, LocalDate deathDate) throws Exception
-    {
-        if (birthDate != null && deathDate != null)
-        {
-            if (birthDate.isAfter(deathDate))
-                throw new Exception("Birthdate can not follow death date");
-        }
-        this.birthDate = birthDate;
-        this.deathDate = deathDate;
-    }
+    //private void setLifeDates(LocalDate birthDate, LocalDate deathDate) throws Exception
+    //{
+    //    if (birthDate != null && deathDate != null)
+    //    {
+    //        if (birthDate.isAfter(deathDate))
+    //            throw new Exception("Birthdate can not follow death date");
+    //    }
+    //    this.birthDate = birthDate;
+    //    this.deathDate = deathDate;
+    //}
 
     public int getAge()
     {
@@ -226,7 +228,22 @@ public class Human implements Serializable, IMember
             throw new Exception("This person can not be own parent");
         }
     }
+/*
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return Objects.equals(name, human.name) && Objects.equals(surname, human.surname) &&
+                Objects.equals(birthDate, human.birthDate) && Objects.equals(deathDate, human.deathDate) &&
+                gender == human.gender && Objects.equals(father, human.father) && Objects.equals(mother, human.mother);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname, birthDate, deathDate, gender, father, mother);
+    }
+*/
     @Override
     public String toString()
     {

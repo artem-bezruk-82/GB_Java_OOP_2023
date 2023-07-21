@@ -12,6 +12,7 @@ import model.Family.Family;
 import FilesHandling.*;
 import model.Human.Human;
 import model.Family.Comparators.MemberSortingTypesEnum;
+import view.family.ConsoleUIFamily;
 import view.human.ConsoleUIHuman;
 
 import java.text.ParseException;
@@ -84,7 +85,7 @@ public class Main {
         System.out.println(romanovFamily);
         */
 
-
+        /*
         try
         {
             ConsoleUIHuman consoleUIHuman = new ConsoleUIHuman();
@@ -94,7 +95,10 @@ public class Main {
         {
             System.out.println(exc.getMessage());
         }
+        */
 
+        ConsoleUIFamily consoleUIFamily = new ConsoleUIFamily("family.dat");
+        consoleUIFamily.start();
 
 
 

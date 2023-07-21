@@ -6,14 +6,18 @@ import view.IView;
 import java.time.LocalDate;
 
 
-public class PresenterHuman extends Presenter
+public class PresenterHuman
 {
-    Human human;
+    private Human human;
+    private IView view;
+
     public PresenterHuman(IView view) throws Exception
     {
-        super(view);
+        this.view = view;
         human = new Human();
     }
+
+    public Human getHuman() { return human; }
 
     public void setName(String name)
     {

@@ -7,10 +7,8 @@ import view.IView;
 import view.menu.Menu;
 import view.menu.commands.human.*;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Scanner;
 
 public class ConsoleUIHuman implements IView
@@ -20,7 +18,8 @@ public class ConsoleUIHuman implements IView
     private PresenterHuman presenter;
     private boolean isWorking;
 
-    public ConsoleUIHuman() throws Exception {
+    public ConsoleUIHuman() throws Exception
+    {
         this.presenter = new PresenterHuman(this);
         this.scanner = new Scanner(System.in);
         isWorking = true;
@@ -35,7 +34,7 @@ public class ConsoleUIHuman implements IView
     public void start() {
 
         Menu menu = new Menu("Human menu\n");
-        menu.add(new Exit(this));
+        menu.add(new Apply(this));
         menu.add(new SetName(this));
         menu.add(new SetSurname(this));
         menu.add(new SetBirthDate(this));
@@ -50,6 +49,7 @@ public class ConsoleUIHuman implements IView
         }
     }
 
+    @Override
     public void end()
     {
         this.isWorking = false;
@@ -100,13 +100,38 @@ public class ConsoleUIHuman implements IView
 
     public void setGender()
     {
-        System.out.println("Please chose gender:");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Please chose gender:\n");
+
         Human.GenderEnum[] genders = Human.GenderEnum.values();
 
-        for (int i = 1; i < genders.length; i++)
-            System.out.println(String.format("%d - %s", i, genders[i]));
+        for (int i = 0; i < genders.length; i++)
+            sb.append(String.format("%d - %s\n", i, genders[i]));
 
-        int genderIndex = 1;
+        int genderIndex = GetConsoleInputInt(sb.toString(), 0, genders.length);
         presenter.setGender(genders[genderIndex]);
+    }
+
+    public PresenterHuman getPresenter() { return presenter; }
+
+    public static int GetConsoleInputInt(String requestText, int startRange, int endRange)
+    {
+        Scanner consoleInput = new Scanner(System.in);
+        int value;
+        do
+        {
+            System.out.println(requestText);
+            while (!consoleInput.hasNextInt())
+            {
+                System.out.printf("Entered value is not integer type. %s\n", requestText);
+                consoleInput.next();
+            }
+            value = consoleInput.nextInt();
+            if (value < startRange || value > endRange)
+            {
+                System.out.printf("Entered value is out of %d...%d range. %s\n", startRange, endRange, requestText);
+            }
+        } while (value < startRange || value > endRange);
+        return value;
     }
 }

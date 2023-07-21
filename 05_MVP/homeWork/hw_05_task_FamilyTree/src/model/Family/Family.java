@@ -19,12 +19,16 @@ public class Family<E extends IMember> implements Serializable, Iterable<E>
         family = new ArrayList<>();
     }
 
-    public Family() { this(null);}
+    public Family() { this("");}
 
-    public void addFamilyMember(E member)
+    public boolean addFamilyMember(E member)
     {
         if (!family.contains(member))
+        {
             family.add(member);
+            return true;
+        }
+        return false;
     }
 
     public String getName() { return name; }
@@ -52,6 +56,11 @@ public class Family<E extends IMember> implements Serializable, Iterable<E>
         return family.get(index);
     }
 
+    public void removeFamilyMember(int index)
+    {
+        family.remove(index);
+    }
+
     @Override
     public String toString()
     {
@@ -69,6 +78,11 @@ public class Family<E extends IMember> implements Serializable, Iterable<E>
             case sort_by_birthDate -> family.sort(new MemberComparatorBirthDate<>());
             case sort_by_deathDate -> family.sort(new MemberComparatorDeathDate<>());
         }
+    }
+
+    public int getSize()
+    {
+        return this.family.size();
     }
 
     @Override
