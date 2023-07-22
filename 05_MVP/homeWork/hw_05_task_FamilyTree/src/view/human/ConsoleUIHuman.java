@@ -2,7 +2,7 @@ package view.human;
 
 
 import model.Human.Human;
-import presenter.PresenterHuman;
+import presenter.Presenter;
 import view.IView;
 import view.menu.Menu;
 import view.menu.commands.human.*;
@@ -15,12 +15,13 @@ public class ConsoleUIHuman implements IView
 {
 
     private Scanner scanner;
-    private PresenterHuman presenter;
+    //private PresenterHuman presenter;
+    private Presenter presenter;
     private boolean isWorking;
 
-    public ConsoleUIHuman() throws Exception
+    public ConsoleUIHuman(Presenter presenter) throws Exception
     {
-        this.presenter = new PresenterHuman(this);
+        this.presenter = presenter;
         this.scanner = new Scanner(System.in);
         isWorking = true;
     }
@@ -58,7 +59,7 @@ public class ConsoleUIHuman implements IView
     public void setName()
     {
         System.out.println("Please enter name");
-        presenter.setName(scanner.nextLine());
+        presenter.setMemberName(scanner.nextLine());
     }
 
     public void setSurname()
@@ -111,8 +112,6 @@ public class ConsoleUIHuman implements IView
         int genderIndex = GetConsoleInputInt(sb.toString(), 0, genders.length);
         presenter.setGender(genders[genderIndex]);
     }
-
-    public PresenterHuman getPresenter() { return presenter; }
 
     public static int GetConsoleInputInt(String requestText, int startRange, int endRange)
     {

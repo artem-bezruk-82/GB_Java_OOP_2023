@@ -9,10 +9,13 @@ public class Model
     private Family<Human> family;
     private String filePath;
 
+    private int currentMemberIndex;
+
     public Model(String filePath)
     {
         this.filePath = filePath;
         load();
+        this.currentMemberIndex = -1;
     }
 
     public void load()
@@ -31,6 +34,27 @@ public class Model
 
     public Family<Human> getFamily() { return this.family; }
 
+
+    public int getCurrentMemberIndex()
+    {
+        return this.currentMemberIndex;
+    }
+
+    public void setCurrentMemberIndex(int index)
+    {
+        if (index >= 0 && index < family.getSize())
+            this.currentMemberIndex = index;
+    }
+
+    public Human getCurrentMember()
+    {
+        if (currentMemberIndex >= 0 && currentMemberIndex < family.getSize())
+            return family.getFamilyMember(currentMemberIndex);
+        else
+        {
+            return null;
+        }
+    }
 
 
 }

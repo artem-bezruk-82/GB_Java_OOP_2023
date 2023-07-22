@@ -1,25 +1,23 @@
 package view.family;
 
-import presenter.PresenterFamily;
+import model.Human.Human;
+import presenter.Presenter;
 import view.IView;
 import view.human.ConsoleUIHuman;
 import view.menu.Menu;
-import view.menu.commands.family.AddMember;
-import view.menu.commands.family.Exit;
-import view.menu.commands.family.GetInfo;
-import view.menu.commands.family.RemoveMember;
+import view.menu.commands.family.*;
 
 import java.util.Scanner;
 
 public class ConsoleUIFamily implements IView
 {
     private Scanner scanner;
-    private PresenterFamily presenter;
+    private Presenter presenter;
     private boolean isWorking;
 
     public ConsoleUIFamily(String filePath)
     {
-        this.presenter = new PresenterFamily(this, filePath);
+        this.presenter = new Presenter(this, filePath);
         this.scanner = new Scanner(System.in);
         isWorking = true;
     }
@@ -38,6 +36,7 @@ public class ConsoleUIFamily implements IView
         menu.add(new AddMember(this));
         menu.add(new GetInfo(this));
         menu.add(new RemoveMember(this));
+        menu.add(new SetMember(this));
 
         while (isWorking)
         {
@@ -58,9 +57,9 @@ public class ConsoleUIFamily implements IView
     {
         try
         {
-            ConsoleUIHuman consoleUIHuman = new ConsoleUIHuman();
-            consoleUIHuman.start();
-            presenter.addMember(consoleUIHuman.getPresenter().getHuman());
+            presenter.addMember(new Human());
+            presenter.selectMember(presenter.getSize()-1);
+            setMemberProperties();
         }
         catch (Exception exception)
         {
@@ -71,7 +70,8 @@ public class ConsoleUIFamily implements IView
     public void removeMember()
     {
         getInfo();
-        int index = GetConsoleInputInt("Please enter index of member you would like to remove", 0, presenter.getSize() -1);
+        int index = GetConsoleInputInt("Please enter index of member you would like to remove",
+                0, presenter.getSize() -1);
         presenter.removeMember(index);
     }
 
@@ -80,6 +80,28 @@ public class ConsoleUIFamily implements IView
     {
         presenter.getInfo();
     }
+
+    public void SetMember()
+    {
+        presenter.getInfo();
+        int index = GetConsoleInputInt("Please chose member", 0, presenter.getSize() -1);
+        presenter.selectMember(index);
+        setMemberProperties();
+    }
+
+    public void setMemberProperties()
+    {
+        try
+        {
+            ConsoleUIHuman consoleUIHuman = new ConsoleUIHuman(presenter);
+            consoleUIHuman.start();
+        }
+        catch (Exception exception)
+        {
+            print(exception.getMessage());
+        }
+    }
+
 
     public static int GetConsoleInputInt(String requestText, int startRange, int endRange)
     {
@@ -101,4 +123,6 @@ public class ConsoleUIFamily implements IView
         } while (value < startRange || value > endRange);
         return value;
     }
+
+
 }

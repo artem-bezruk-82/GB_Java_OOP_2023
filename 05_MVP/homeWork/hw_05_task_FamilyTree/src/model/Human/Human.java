@@ -139,17 +139,6 @@ public class Human implements Serializable, IMember
         this.deathDate = deathDate;
     }
 
-    //private void setLifeDates(LocalDate birthDate, LocalDate deathDate) throws Exception
-    //{
-    //    if (birthDate != null && deathDate != null)
-    //    {
-    //        if (birthDate.isAfter(deathDate))
-    //            throw new Exception("Birthdate can not follow death date");
-    //    }
-    //    this.birthDate = birthDate;
-    //    this.deathDate = deathDate;
-    //}
-
     public int getAge()
     {
         return Period.between(birthDate, LocalDate.now()).getYears();
@@ -228,22 +217,22 @@ public class Human implements Serializable, IMember
             throw new Exception("This person can not be own parent");
         }
     }
-/*
+
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Human human = (Human) o;
-        return Objects.equals(name, human.name) && Objects.equals(surname, human.surname) &&
-                Objects.equals(birthDate, human.birthDate) && Objects.equals(deathDate, human.deathDate) &&
-                gender == human.gender && Objects.equals(father, human.father) && Objects.equals(mother, human.mother);
+    public boolean equals(Object obj)
+    {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Human human = (Human) obj;
+        return Objects.equals(this.hashCode(), human.hashCode());
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(name, surname, birthDate, deathDate, gender, father, mother);
     }
-*/
+
     @Override
     public String toString()
     {
